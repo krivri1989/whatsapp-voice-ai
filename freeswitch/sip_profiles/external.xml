@@ -9,7 +9,7 @@
     <param name="sip-port" value="5060"/>
     <param name="tls" value="true"/>
     <param name="tls-sip-port" value="5061"/>
-    <param name="tls-cert-dir" value="/certs"/>
+    <param name="tls-cert-dir" value="/etc/freeswitch/tls"/>
     <param name="tls-version" value="tlsv1.2"/>
     <param name="context" value="public"/>
     <param name="debug" value="1"/>
@@ -17,5 +17,9 @@
     <param name="auth-calls" value="false"/>
     <param name="inbound-codec-prefs" value="OPUS,PCMA,PCMU"/>
     <param name="outbound-codec-prefs" value="OPUS,PCMA,PCMU"/>
+    <!-- SDES SRTP - Meta WhatsApp requires encrypted media -->
+    <param name="rtp-secure-media" value="optional"/>
+    <param name="rtp-secure-media-inbound" value="optional"/>
+    <param name="rtp-secure-media-outbound" value="optional"/>
   </settings>
 </profile>
