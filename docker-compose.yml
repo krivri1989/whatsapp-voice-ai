@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   freeswitch:
     image: ghcr.io/krivri1989/whatsapp-voice-ai:latest
@@ -13,10 +11,10 @@ services:
       - "8021:8021/tcp"
       - "16384-16500:16384-16500/udp"
     volumes:
-      - traefik_data:/traefik_data:ro
+      - extract-cert_fs-tls:/le-certs:ro
     environment:
       - SIP_IP=69.62.85.128
 
 volumes:
-  traefik_data:
+  extract-cert_fs-tls:
     external: true
