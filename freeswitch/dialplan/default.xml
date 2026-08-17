@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<context name="public">
+  <extension name="incoming_call">
+    <condition field="destination_number" expression="^(.+)$">
+      <action application="log" data="INFO Incoming call from ${caller_id_number}"/>
+      <action application="answer"/>
+      <action application="sleep" data="1000"/>
+      <action application="playback" data="tone_stream://%(1000,0,440)"/>
+      <action application="sleep" data="30000"/>
+      <action application="hangup"/>
+    </condition>
+  </extension>
+</context>

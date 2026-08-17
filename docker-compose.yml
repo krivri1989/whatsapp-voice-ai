@@ -1,0 +1,66 @@
+version: "3.8"
+
+services:
+  # Config init — writes FreeSWITCH XML configs to shared volume
+  config-init:
+    image: alpine:3.20
+    container_name: voice-config-init
+    volumes:
+      - fs-config:/conf
+      - fs-certs:/certs
+      - fs-sounds:/sounds
+      - fs-scripts:/scripts
+    entrypoint: ["/bin/sh", "/scripts/init.sh"]
+    volumes_from:
+      - config-data
+
+  # Config data — contains all XML configs baked in
+  config-data:
+    image: alpine:3.20
+    container_name: voice-config-data
+    volumes:
+      - ./freeswitch:/freeswitch
+      - ./scripts:/scripts
+    command: tail -f /dev/null
+
+  # FreeSWITCH — SIP server
+  freeswitch:
+    image: signalwire/freeswitch:latest
+    container_name: freeswitch
+    restart: unless-stopped
+    depends_on:
+      - config-init
+    volumes:
+      - fs-config:/conf
+      - fs-certs:/certs
+      - fs-sounds:/sounds
+    ports:
+      - "5060:5060/udp"
+      - "5060:5060/tcp"
+      - "5061:5061/tcp"
+      - "5061:5061/udp"
+      - "8021:8021/tcp"
+      - "16384-16500:16384-16500/udp"
+    command: freeswitch -nc -nf -conf /conf -certs /certs
+
+  # Whisper STT — free speech-to-text
+  whisper-stt:
+    image: fedirz/faster-whisper-server:latest
+    container_name: whisper-stt
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - whisper-models:/root/.cache/huggingface
+    environment:
+      - WHISPER__MODEL=Systran/faster-whisper-medium
+      - WHISPER__INFERENCE_DEVICE=cpu
+      - WHISPER__LANGUAGE=en
+    mem_limit: 2g
+
+volumes:
+  fs-config:
+  fs-certs:
+  fs-sounds:
+  fs-scripts:
+  whisper-models:
