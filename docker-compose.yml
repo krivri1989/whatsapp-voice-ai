@@ -1,10 +1,6 @@
 version: "3.8"
 
 services:
-  # ============================================
-  # FreeSWITCH - SIP server for WhatsApp calls
-  # Uses Let's Encrypt TLS cert for Meta integration
-  # ============================================
   freeswitch:
     image: safarov/freeswitch:latest
     container_name: freeswitch
@@ -16,29 +12,5 @@ services:
       - "5061:5061/udp"
       - "8021:8021/tcp"
       - "16384-16500:16384-16500/udp"
-    volumes:
-      - letsencrypt:/etc/letsencrypt:ro
-      - fs-recordings:/sounds/recordings
     environment:
       - SIP_IP=69.62.85.128
-      - DOMAIN=srv923799.hstgr.cloud
-
-  # ============================================
-  # Whisper STT - Free speech-to-text
-  # OpenAI-compatible API on port 8000
-  # ============================================
-  whisper-stt:
-    image: onerahmet/openai-whisper-asr-webservice:latest
-    container_name: whisper-stt
-    restart: unless-stopped
-    ports:
-      - "8000:9000"
-    environment:
-      - ASR_MODEL=base
-      - ASR_ENGINE=openai_whisper
-
-volumes:
-  letsencrypt:
-    external: true
-    name: whatsapp-voice-ai_letsencrypt
-  fs-recordings:
