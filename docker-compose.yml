@@ -1,19 +1,9 @@
 version: "3.8"
 
 services:
-  whisper-stt:
-    image: fedirz/faster-whisper-server:latest
-    container_name: whisper-stt
+  test:
+    image: nginx:alpine
+    container_name: voice-test
     restart: unless-stopped
     ports:
-      - "8000:8000"
-    volumes:
-      - whisper-models:/root/.cache/huggingface
-    environment:
-      - WHISPER__MODEL=Systran/faster-whisper-medium
-      - WHISPER__INFERENCE_DEVICE=cpu
-      - WHISPER__LANGUAGE=en
-    mem_limit: 2g
-
-volumes:
-  whisper-models:
+      - "8888:80"
