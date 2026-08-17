@@ -1,16 +1,14 @@
 version: "3.8"
 
 services:
-  freeswitch:
-    image: safarov/freeswitch:latest
-    container_name: freeswitch
-    restart: unless-stopped
+  certbot:
+    image: certbot/certbot:latest
+    container_name: certbot
     ports:
-      - "5060:5060/udp"
-      - "5060:5060/tcp"
-      - "5061:5061/tcp"
-      - "5061:5061/udp"
-      - "8021:8021/tcp"
-      - "16384-16500:16384-16500/udp"
-    environment:
-      - SIP_IP=69.62.85.128
+      - "80:80"
+    volumes:
+      - letsencrypt:/etc/letsencrypt
+    command: certonly --standalone -d srv923799.hstgr.cloud --non-interactive --agree-tos --email user@srv923799.hstgr.cloud
+
+volumes:
+  letsencrypt:
