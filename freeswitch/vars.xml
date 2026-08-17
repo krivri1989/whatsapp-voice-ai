@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configuration name="vars.xml" description="Global Variables">
   <X-PRE-PROCESS cmd="set" data="domain=srv923799.hstgr.cloud"/>
+  <X-PRE-PROCESS cmd="set" data="domain_name=srv923799.hstgr.cloud"/>
+  <X-PRE-PROCESS cmd="set" data="hold_music=local_stream://default"/>
+  <X-PRE-PROCESS cmd="set" data="use_profile=external"/>
   <X-PRE-PROCESS cmd="set" data="sip_port=5060"/>
   <X-PRE-PROCESS cmd="set" data="tls_sip_port=5061"/>
   <X-PRE-PROCESS cmd="set" data="external_rtp_ip=69.62.85.128"/>
   <X-PRE-PROCESS cmd="set" data="external_sip_ip=69.62.85.128"/>
+  <X-PRE-PROCESS cmd="set" data="local_ip_v4=0.0.0.0"/>
+  <X-PRE-PROCESS cmd="set" data="global_codec_prefs=OPUS,PCMA,PCMU"/>
+  <X-PRE-PROCESS cmd="set" data="outbound_codec_prefs=OPUS,PCMA,PCMU"/>
 </configuration>
