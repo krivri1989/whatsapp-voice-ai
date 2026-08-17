@@ -1,15 +1,15 @@
 FROM safarov/freeswitch:latest
 
-# Copy pre-generated TLS certs to both /etc/freeswitch/tls and /usr/share/freeswitch/conf/vanilla/tls
+# Remove default vanilla profiles that conflict on ports
+RUN rm -rf /etc/freeswitch/sip_profiles/* /usr/share/freeswitch/conf/vanilla/sip_profiles/* 2>/dev/null || true
+
+# Copy pre-generated TLS certs
 COPY tls/ /etc/freeswitch/tls/
 COPY tls/ /usr/share/freeswitch/conf/vanilla/tls/
 
-# Copy custom configs to both locations so entrypoint does not overwrite them with defaults
+# Copy custom configs
 COPY freeswitch/autoload_configs/ /etc/freeswitch/autoload_configs/
 COPY freeswitch/autoload_configs/ /usr/share/freeswitch/conf/vanilla/autoload_configs/
-
-COPY freeswitch/sip_profiles/ /etc/freeswitch/sip_profiles/
-COPY freeswitch/sip_profiles/ /usr/share/freeswitch/conf/vanilla/sip_profiles/
 
 COPY freeswitch/dialplan/ /etc/freeswitch/dialplan/
 COPY freeswitch/dialplan/ /usr/share/freeswitch/conf/vanilla/dialplan/

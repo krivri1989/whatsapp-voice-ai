@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<configuration name="sofia.conf" description="Sofia SIP">
+<configuration name="sofia.conf" description="Sofia Endpoint">
   <global_settings>
     <param name="log-level" value="0"/>
+    <param name="auto-restart" value="true"/>
   </global_settings>
   <profiles>
-    <X-PRE-PROCESS cmd="include" data="../sip_profiles/*.xml"/>
+    <profile name="external">
+      <gateways/>
+      <settings>
+        <param name="debug" value="1"/>
+        <param name="sip-ip" value="$${local_ip_v4}"/>
+        <param name="ext-sip-ip" value="69.62.85.128"/>
+        <param name="rtp-ip" value="$${local_ip_v4}"/>
+        <param name="ext-rtp-ip" value="69.62.85.128"/>
+        <param name="sip-port" value="5060"/>
+        <param name="tls" value="true"/>
+        <param name="tls-sip-port" value="5061"/>
+        <param name="tls-cert-dir" value="/etc/freeswitch/tls"/>
+        <param name="tls-version" value="tlsv1.2,tlsv1.3"/>
+        <param name="context" value="public"/>
+        <param name="auth-calls" value="false"/>
+        <param name="inbound-codec-prefs" value="OPUS,PCMA,PCMU"/>
+        <param name="outbound-codec-prefs" value="OPUS,PCMA,PCMU"/>
+        <param name="rtp-timeout-sec" value="300"/>
+        <param name="inbound-late-negotiation" value="true"/>
+      </settings>
+    </profile>
   </profiles>
 </configuration>

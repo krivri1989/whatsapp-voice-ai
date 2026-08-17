@@ -8,10 +8,9 @@
     <load module="mod_dialplan_xml"/>
     <load module="mod_commands"/>
     <load module="mod_dptools"/>
-    <load module="mod_playback"/>
-    <load module="mod_tone_stream"/>
+    <load module="mod_opus"/>
     <load module="mod_sndfile"/>
     <load module="mod_native_file"/>
-    <load module="mod_opus"/>
+    <load module="mod_tone_stream"/>
   </modules>
 </configuration>
