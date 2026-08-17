@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<configuration name="event_socket.conf" description="Socket Client">
+<configuration name="event_socket.conf" description="Event Socket">
   <settings>
     <param name="nat-map" value="false"/>
     <param name="listen-ip" value="0.0.0.0"/>

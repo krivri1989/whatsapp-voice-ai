@@ -16,4 +16,5 @@ else
 fi
 
 echo "[entrypoint] Starting FreeSWITCH..."
-exec /docker-entrypoint.sh freeswitch
+# Suppress docker-entrypoint file copy noise, keep FreeSWITCH logs visible
+exec /docker-entrypoint.sh freeswitch 2>&1 | grep -v "^'/usr/share"

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<configuration name="freeswitch.xml" description="FreeSWITCH Core Configuration">
+<configuration name="freeswitch.xml" description="FreeSWITCH Core">
   <X-PRE-PROCESS cmd="include" data="vars.xml"/>
   <X-PRE-PROCESS cmd="include" data="autoload_configs/modules.conf.xml"/>
   <X-PRE-PROCESS cmd="include" data="autoload_configs/event_socket.conf.xml"/>
   <X-PRE-PROCESS cmd="include" data="autoload_configs/sofia.conf.xml"/>
   <X-PRE-PROCESS cmd="include" data="autoload_configs/console.conf.xml"/>
-  <section name="dialplan" description="Regex/XML Dialplan">
-    <X-PRE-PROCESS cmd="include" data="dialplan/*.xml"/>
-  </section>
+  <sections>
+    <section name="dialplan" description="Dialplan">
+      <X-PRE-PROCESS cmd="include" data="dialplan/*.xml"/>
+    </section>
+  </sections>
 </configuration>
