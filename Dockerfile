@@ -15,6 +15,7 @@ COPY freeswitch/vars.xml /etc/freeswitch/vars.xml
 COPY freeswitch/vars.xml /usr/share/freeswitch/conf/vanilla/vars.xml
 
 COPY entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
 
 EXPOSE 5060/tcp 5060/udp 5061/tcp 5061/udp 8021/tcp 16384-16500/udp
 
