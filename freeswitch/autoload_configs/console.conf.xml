@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<configuration name="console.conf" description="Console">
+<configuration name="console.conf" description="Console Logger">
   <mappings>
     <map name="all" value="console,debug,info,notice,warning,err,crit,alert"/>
   </mappings>

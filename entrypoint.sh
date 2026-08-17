@@ -12,16 +12,13 @@ try:
     with open("/traefik_data/acme.json", "r") as f:
         data = json.load(f)
     
-    # Try different ACME resolver names in Traefik
     certs = []
     for resolver_name, resolver in data.items():
         if isinstance(resolver, dict) and "Certificates" in resolver and resolver["Certificates"]:
             certs = resolver["Certificates"]
             break
     
-    if not certs:
-        print("[entrypoint] No certificates found in acme.json")
-    else:
+    if certs:
         cert_data = certs[0]
         cert_pem = base64.b64decode(cert_data["certificate"]).decode("utf-8")
         key_pem = base64.b64decode(cert_data["key"]).decode("utf-8")
@@ -33,9 +30,9 @@ try:
         with open("/etc/freeswitch/tls/cafile.pem", "w") as f: f.write(cert_pem)
         print("[entrypoint] Successfully extracted Let\x27s Encrypt TLS certificate for FreeSWITCH!")
 except Exception as e:
-    print(f"[entrypoint] Note: {e}")
+    print(f"[entrypoint] Extraction error: {e}")
 ' || true
 fi
 
 echo "[entrypoint] Starting FreeSWITCH..."
-exec freeswitch -nc -nf
+exec freeswitch -nc -nf -nonat
