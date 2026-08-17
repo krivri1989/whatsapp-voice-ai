@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configuration name="sofia.conf" description="Sofia Endpoint">
   <global_settings>
-    <param name="log-level" value="0"/>
+    <param name="log-level" value="9"/>
     <param name="auto-restart" value="true"/>
+    <param name="debug-presence" value="0"/>
   </global_settings>
   <profiles>
     <profile name="external">
       <gateways/>
       <settings>
-        <param name="debug" value="1"/>
+        <param name="debug" value="9"/>
+        <param name="sip-trace" value="yes"/>
+        <param name="log-auth-failures" value="true"/>
         <param name="sip-ip" value="$${local_ip_v4}"/>
         <param name="ext-sip-ip" value="69.62.85.128"/>
         <param name="rtp-ip" value="$${local_ip_v4}"/>
@@ -18,12 +21,16 @@
         <param name="tls-sip-port" value="5061"/>
         <param name="tls-cert-dir" value="/etc/freeswitch/tls"/>
         <param name="tls-version" value="tlsv1.2,tlsv1.3"/>
+        <param name="tls-verify-date" value="false"/>
+        <param name="tls-verify-policy" value="none"/>
         <param name="context" value="public"/>
         <param name="auth-calls" value="false"/>
         <param name="inbound-codec-prefs" value="OPUS,PCMA,PCMU"/>
         <param name="outbound-codec-prefs" value="OPUS,PCMA,PCMU"/>
         <param name="rtp-timeout-sec" value="300"/>
         <param name="inbound-late-negotiation" value="true"/>
+        <param name="inbound-zrtp-passthrough" value="true"/>
+        <param name="rtp-secure-media" value="optional"/>
       </settings>
     </profile>
   </profiles>

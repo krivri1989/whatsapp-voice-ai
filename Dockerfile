@@ -1,6 +1,6 @@
 FROM safarov/freeswitch:latest
 
-# Copy pre-generated TLS certs (generated with domain srv923799.hstgr.cloud)
+# Copy pre-generated TLS certs
 COPY tls/ /etc/freeswitch/tls/
 COPY tls/ /usr/share/freeswitch/conf/vanilla/tls/
 
@@ -10,6 +10,9 @@ COPY freeswitch/autoload_configs/ /usr/share/freeswitch/conf/vanilla/autoload_co
 
 COPY freeswitch/dialplan/ /etc/freeswitch/dialplan/
 COPY freeswitch/dialplan/ /usr/share/freeswitch/conf/vanilla/dialplan/
+
+COPY freeswitch/directory/ /etc/freeswitch/directory/
+COPY freeswitch/directory/ /usr/share/freeswitch/conf/vanilla/directory/
 
 COPY freeswitch/vars.xml /etc/freeswitch/vars.xml
 COPY freeswitch/vars.xml /usr/share/freeswitch/conf/vanilla/vars.xml
