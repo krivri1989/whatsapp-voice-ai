@@ -12,5 +12,11 @@ services:
       - "5061:5061/udp"
       - "8021:8021/tcp"
       - "16384-16500:16384-16500/udp"
+    volumes:
+      - traefik_data:/traefik_data:ro
     environment:
       - SIP_IP=69.62.85.128
+
+volumes:
+  traefik_data:
+    external: true
