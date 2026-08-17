@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<include>
+  <context name="public">
+    <extension name="whatsapp_inbound">
+      <condition field="destination_number" expression="^(.*)$">
+        <action application="log" data="CRIT =============================================="/>
+        <action application="log" data="CRIT RECEIVED WHATSAPP CALL FROM ${caller_id_number} TO ${destination_number}"/>
+        <action application="log" data="CRIT =============================================="/>
+        <action application="answer"/>
+        <action application="sleep" data="500"/>
+        <action application="playback" data="tone_stream://%(1000,500,440,480);loops=3"/>
+        <action application="sleep" data="5000"/>
+        <action application="hangup"/>
+      </condition>
+    </extension>
+  </context>
+</include>
